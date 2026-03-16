@@ -1,5 +1,5 @@
 import pool from '../config/db.js';
-
+// Consultation Model
 const consultationModel = {
   async create({ company_id, title, description, priority = 'medium' }) {
     const result = await pool.query(
@@ -9,7 +9,7 @@ const consultationModel = {
     );
     return result.rows[0];
   },
-
+// Get consultation by ID with company and user details
   async getById(id) {
     const result = await pool.query(
       `SELECT c.*, co.company_name, u.first_name, u.last_name, u.email
@@ -21,7 +21,7 @@ const consultationModel = {
     );
     return result.rows[0] || null;
   },
-
+// Get consultations by company ID
   async getByCompanyId(company_id) {
     const result = await pool.query(
       'SELECT * FROM consultations WHERE company_id = $1 ORDER BY created_at DESC',
@@ -29,7 +29,7 @@ const consultationModel = {
     );
     return result.rows;
   },
-
+// Get all consultations with company details
   async getAll() {
     const result = await pool.query(
       `SELECT c.*, co.company_name
@@ -39,7 +39,7 @@ const consultationModel = {
     );
     return result.rows;
   },
-
+//  Update consultation status
   async updateStatus(id, status) {
     const result = await pool.query(
       'UPDATE consultations SET status = $1, updated_at = NOW() WHERE id = $2 RETURNING *',
@@ -47,7 +47,7 @@ const consultationModel = {
     );
     return result.rows[0] || null;
   },
-
+//  Add note to consultation
   async addNote({ consultation_id, user_id, note }) {
     const result = await pool.query(
       `INSERT INTO consultation_notes (consultation_id, user_id, note)
@@ -56,7 +56,7 @@ const consultationModel = {
     );
     return result.rows[0];
   },
-
+//  Get notes for a consultation with user details
   async getNotes(consultation_id) {
     const result = await pool.query(
       `SELECT cn.*, u.first_name, u.last_name, u.role
@@ -68,7 +68,7 @@ const consultationModel = {
     );
     return result.rows;
   },
-
+// Get consultation count by status for dashboard
   async getCountByStatus() {
     const result = await pool.query(
       'SELECT status, COUNT(*) as count FROM consultations GROUP BY status'

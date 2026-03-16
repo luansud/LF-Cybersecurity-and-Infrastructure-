@@ -1,9 +1,7 @@
 import pool from '../config/db.js';
-
+// User model for authentication and user management
 const userModel = {
-  /**
-   * Find user by email
-   */
+// Get user by email for authentication
   async getByEmail(email) {
     const result = await pool.query(
       'SELECT * FROM users WHERE email = $1',
@@ -11,11 +9,8 @@ const userModel = {
     );
     return result.rows[0] || null;
   },
-
-  /**
-   * Find user by ID
-   */
-  async getById(id) {
+// Get user by ID without password hash for security reasons
+   async getById(id) {
     const result = await pool.query(
       'SELECT id, email, first_name, last_name, role, is_active, created_at FROM users WHERE id = $1',
       [id]
@@ -23,9 +18,7 @@ const userModel = {
     return result.rows[0] || null;
   },
 
-  /**
-   * Create a new user
-   */
+//  User registration
   async create({ email, password_hash, first_name, last_name, role = 'user' }) {
     const result = await pool.query(
       `INSERT INTO users (email, password_hash, first_name, last_name, role)
@@ -36,9 +29,7 @@ const userModel = {
     return result.rows[0];
   },
 
-  /**
-   * Get all users (admin)
-   */
+ // Admin can view all users
   async getAll() {
     const result = await pool.query(
       'SELECT id, email, first_name, last_name, role, is_active, created_at FROM users ORDER BY created_at DESC'
@@ -46,9 +37,7 @@ const userModel = {
     return result.rows;
   },
 
-  /**
-   * Update user role (admin)
-   */
+// Admin can change user roles
   async updateRole(id, role) {
     const result = await pool.query(
       'UPDATE users SET role = $1, updated_at = NOW() WHERE id = $2 RETURNING *',
@@ -57,9 +46,7 @@ const userModel = {
     return result.rows[0] || null;
   },
 
-  /**
-   * Toggle user active status (admin)
-   */
+  // Admin can activate/deactivate user accounts
   async toggleActive(id) {
     const result = await pool.query(
       'UPDATE users SET is_active = NOT is_active, updated_at = NOW() WHERE id = $1 RETURNING *',
@@ -68,9 +55,7 @@ const userModel = {
     return result.rows[0] || null;
   },
 
-  /**
-   * Update user profile
-   */
+ // User profile update
   async updateProfile(id, { first_name, last_name, email }) {
     const result = await pool.query(
       `UPDATE users SET first_name = $1, last_name = $2, email = $3, updated_at = NOW()
@@ -80,9 +65,7 @@ const userModel = {
     return result.rows[0] || null;
   },
 
-  /**
-   * Get user count by role (admin dashboard stats)
-   */
+// Admin dashboard stats
   async getCountByRole() {
     const result = await pool.query(
       `SELECT role, COUNT(*) as count FROM users GROUP BY role`
