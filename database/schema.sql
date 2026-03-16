@@ -1,16 +1,5 @@
--- LF Cybersecurity and Infrastructure
--- Database Schema
 
--- Drop tables in reverse dependency order
-DROP TABLE IF EXISTS ticket_responses CASCADE;
-DROP TABLE IF EXISTS tickets CASCADE;
-DROP TABLE IF EXISTS consultation_notes CASCADE;
-DROP TABLE IF EXISTS consultations CASCADE;
-DROP TABLE IF EXISTS reviews CASCADE;
-DROP TABLE IF EXISTS news_articles CASCADE;
-DROP TABLE IF EXISTS site_content CASCADE;
-DROP TABLE IF EXISTS companies CASCADE;
-DROP TABLE IF EXISTS users CASCADE;
+
 
 -- USERS
 CREATE TABLE users (
@@ -147,22 +136,6 @@ INSERT INTO users (email, password_hash, first_name, last_name, role) VALUES
 INSERT INTO companies (user_id, company_name, industry, company_size, phone) VALUES
 (2, 'TestCorp Solutions', 'Technology', '51-200', '(555) 123-4567');
 
--- Sample news articles
-INSERT INTO news_articles (title, summary, content, category, is_published, author_id) VALUES
-('Major Data Breach Exposes 50 Million Records',
- 'A leading tech company suffered a massive data breach affecting millions of users worldwide.',
- 'In what security experts are calling one of the largest breaches of the year, a major technology company has confirmed that approximately 50 million user records were compromised in a sophisticated cyber attack. The breach, discovered during a routine security audit, exposed email addresses, hashed passwords, and in some cases, partial payment information. The company has since patched the vulnerability and is notifying affected users. This incident serves as a stark reminder of the importance of robust cybersecurity measures and regular security assessments.',
- 'cyber_world', true, 1),
-
-('Why Two-Factor Authentication Is No Longer Optional',
- 'Understanding the critical importance of 2FA in today''s threat landscape.',
- 'As cyber attacks become increasingly sophisticated, relying solely on passwords for account security is no longer adequate. Two-factor authentication (2FA) adds a crucial second layer of protection that can prevent unauthorized access even when passwords are compromised. In this article, we explore the different types of 2FA available, best practices for implementation, and why every individual and organization should adopt this security measure immediately. From SMS codes to authenticator apps and hardware keys, we break down the options and help you choose the right approach for your needs.',
- 'articles', true, 1),
-
-('New Cybersecurity Fundamentals Module Released',
- 'Our latest course module covers essential password management and social engineering awareness.',
- 'We are excited to announce the release of Module 5 in our Cybersecurity Fundamentals course: "Password Management & Social Engineering Defense." This comprehensive module covers creating and managing strong passwords, identifying phishing attempts, understanding social engineering tactics, and using password managers effectively. Students who have completed the previous modules can access this new content immediately through their Hotmart dashboard.',
- 'course_news', true, 1);
 
 -- Sample consultation
 INSERT INTO consultations (company_id, title, description, status, priority) VALUES
