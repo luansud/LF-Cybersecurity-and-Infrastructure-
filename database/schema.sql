@@ -1,5 +1,13 @@
-
-
+-- Drop tables in reverse dependency order
+DROP TABLE IF EXISTS ticket_responses CASCADE;
+DROP TABLE IF EXISTS tickets CASCADE;
+DROP TABLE IF EXISTS consultation_notes CASCADE;
+DROP TABLE IF EXISTS consultations CASCADE;
+DROP TABLE IF EXISTS reviews CASCADE;
+DROP TABLE IF EXISTS news_articles CASCADE;
+DROP TABLE IF EXISTS site_content CASCADE;
+DROP TABLE IF EXISTS companies CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 
 -- USERS
 CREATE TABLE users (
