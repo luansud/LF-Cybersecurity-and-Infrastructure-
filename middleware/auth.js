@@ -1,7 +1,5 @@
-/**
- * Authentication & Authorization Middleware
- */
 
+ // * Authentication & Authorization Middleware
 // Check if user is logged in
 export function isAuthenticated(req, res, next) {
   if (req.session.user) {
