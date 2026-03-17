@@ -1,0 +1,42 @@
+<header class="site-header">
+  <nav class="navbar">
+    <a href="/" class="nav-logo">
+      <img src="/images/logo.png" alt="LF Logo"> LF Cybersecurity
+    </a>
+
+    <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/news">News</a></li>
+      <li><a href="/course">Course</a></li>
+      <li><a href="/consulting">Consulting</a></li>
+      <li><a href="/about">About</a></li>
+
+      <% if (currentUser) { %>
+        <li class="nav-divider"></li>
+
+        <% if (currentUser.role === 'admin') { %>
+          <li><a href="/admin">Admin Dashboard</a></li>
+        <% } else if (currentUser.role === 'company') { %>
+          <li><a href="/company/dashboard">Dashboard</a></li>
+        <% } else { %>
+          <li><a href="/dashboard">Dashboard</a></li>
+        <% } %>
+
+        <li><a href="/reviews/my">My Reviews</a></li>
+        <li><a href="/tickets/my">My Tickets</a></li>
+
+        <li class="nav-user">
+          <span class="nav-user-name"><%= currentUser.first_name %></span>
+          <form action="/logout" method="POST" class="logout-form">
+            <button type="submit" class="btn-logout">Logout</button>
+          </form>
+        </li>
+      <% } else { %>
+        <li><a href="/login" class="btn-nav-login">Login</a></li>
+        <li><a href="/register" class="btn-nav-register">Register</a></li>
+      <% } %>
+    </ul>
+  </nav>
+</header>
