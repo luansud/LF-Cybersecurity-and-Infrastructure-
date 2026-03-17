@@ -1,8 +1,7 @@
 import { body, validationResult } from 'express-validator';
 
-/**
- * Handle validation results — returns errors to the caller
- */
+// Handle validation results — returns errors to the caller
+
 export function handleValidationErrors(req, res, next) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -12,9 +11,7 @@ export function handleValidationErrors(req, res, next) {
   next();
 }
 
-/**
- * Registration validation rules
- */
+// Registration validation rules
 export const validateRegistration = [
   body('first_name')
     .trim()
@@ -41,10 +38,7 @@ export const validateRegistration = [
     .isIn(['user', 'company']).withMessage('Please select a valid account type.'),
   handleValidationErrors,
 ];
-
-/**
- * Login validation rules
- */
+// Login validation rules
 export const validateLogin = [
   body('email')
     .trim()
@@ -55,9 +49,7 @@ export const validateLogin = [
   handleValidationErrors,
 ];
 
-/**
- * Review validation rules
- */
+// Company profile validation rules
 export const validateReview = [
   body('content')
     .trim()
@@ -71,9 +63,7 @@ export const validateReview = [
   handleValidationErrors,
 ];
 
-/**
- * Ticket validation rules
- */
+//  Company profile validation rules
 export const validateTicket = [
   body('subject')
     .trim()
@@ -93,9 +83,7 @@ export const validateTicket = [
   handleValidationErrors,
 ];
 
-/**
- * Consultation request validation rules
- */
+// Consultation request validation rules
 export const validateConsultation = [
   body('title')
     .trim()
@@ -112,10 +100,7 @@ export const validateConsultation = [
     .isIn(['low', 'medium', 'high']).withMessage('Invalid priority level.'),
   handleValidationErrors,
 ];
-
-/**
- * News article validation rules
- */
+// Article submission validation rules
 export const validateArticle = [
   body('title')
     .trim()

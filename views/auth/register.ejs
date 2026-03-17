@@ -1,0 +1,90 @@
+<section class="auth-page">
+  <div class="auth-card auth-card-wide">
+    <h1>Create Account</h1>
+    <p class="auth-subtitle">Choose your account type and fill in your details</p>
+
+    <form action="/register" method="POST" class="form" id="register-form">
+      <div class="form-group">
+        <label>Account Type</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input type="radio" name="account_type" value="user" checked> Individual (Course)
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="account_type" value="company"> Business (Consulting)
+          </label>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="first_name">First Name</label>
+          <input type="text" id="first_name" name="first_name" required placeholder="First name">
+        </div>
+        <div class="form-group">
+          <label for="last_name">Last Name</label>
+          <input type="text" id="last_name" name="last_name" required placeholder="Last name">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required placeholder="your@email.com">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required minlength="8" placeholder="Min. 8 characters">
+        </div>
+        <div class="form-group">
+          <label for="confirm_password">Confirm Password</label>
+          <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirm password">
+        </div>
+      </div>
+
+      <!-- Company fields (shown/hidden via JS) -->
+      <div id="company-fields" class="company-fields hidden">
+        <hr>
+        <h3>Company Information</h3>
+
+        <div class="form-group">
+          <label for="company_name">Company Name</label>
+          <input type="text" id="company_name" name="company_name" placeholder="Your company name">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="industry">Industry</label>
+            <input type="text" id="industry" name="industry" placeholder="e.g. Technology, Finance">
+          </div>
+          <div class="form-group">
+            <label for="company_size">Company Size</label>
+            <select id="company_size" name="company_size">
+              <option value="">Select size</option>
+              <option value="1-10">1-10 employees</option>
+              <option value="11-50">11-50 employees</option>
+              <option value="51-200">51-200 employees</option>
+              <option value="200+">200+ employees</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
+          </div>
+          <div class="form-group">
+            <label for="website">Website</label>
+            <input type="url" id="website" name="website" placeholder="https://yourcompany.com">
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+    </form>
+
+    <p class="auth-footer">Already have an account? <a href="/login">Login here</a></p>
+  </div>
+</section>
