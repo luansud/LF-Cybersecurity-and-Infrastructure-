@@ -1,0 +1,26 @@
+<section class="page-header">
+  <span class="card-badge"><%= categoryLabel %></span>
+  <h1><%= article.title %></h1>
+  <div class="article-meta">
+    <span class="card-date"><%= new Date(article.created_at).toLocaleDateString() %></span>
+    <% if (article.first_name) { %>
+      <span class="card-author">By <%= article.first_name %> <%= article.last_name %></span>
+    <% } %>
+  </div>
+</section>
+
+<section class="section">
+  <article class="article-content">
+    <% if (article.image_url) { %>
+      <img src="<%= article.image_url %>" alt="<%= article.title %>" class="article-image">
+    <% } %>
+    <div class="article-body">
+      <%- article.content.replace(/\n/g, '<br>') %>
+    </div>
+  </article>
+
+  <div class="article-nav">
+    <a href="/news/<%= article.category %>" class="btn btn-outline">&larr; Back to <%= categoryLabel %></a>
+    <a href="/news" class="btn btn-outline">All News</a>
+  </div>
+</section>

@@ -1,0 +1,47 @@
+<section class="page-header">
+  <h1><%= content.page_title || 'Cybersecurity Fundamentals Course' %></h1>
+  <p class="page-subtitle"><%= content.page_description || '' %></p>
+</section>
+
+<section class="section">
+  <div class="course-info">
+    <div class="course-details">
+      <h2>What You Will Learn</h2>
+      <ul class="feature-list">
+        <li>&#128274; Password security and management best practices</li>
+        <li>&#128373; Identifying phishing and social engineering attacks</li>
+        <li>&#128272; Two-factor authentication setup and management</li>
+        <li>&#128187; Safe browsing habits and VPN usage</li>
+        <li>&#128231; Email security and spam prevention</li>
+        <li>&#128241; Mobile device security essentials</li>
+      </ul>
+    </div>
+
+    <div class="course-cta-box">
+      <h3>Ready to Get Started?</h3>
+      <p>Access our comprehensive video course on Hotmart. Learn at your own pace with practical exercises and real-world examples.</p>
+      <a href="<%= content.hotmart_url || '#' %>" target="_blank" rel="noopener" class="btn btn-primary btn-large">
+        Access Course on Hotmart &rarr;
+      </a>
+      <p class="cta-note">Already a student? <a href="/login">Login</a> to access support and leave a review.</p>
+    </div>
+  </div>
+</section>
+
+<% if (reviews && reviews.length > 0) { %>
+<section class="section section-alt">
+  <h2 class="section-title">Student Reviews</h2>
+  <div class="testimonials">
+    <% reviews.forEach(review => { %>
+      <div class="testimonial-card">
+        <div class="stars">
+          <% for (let i = 0; i < review.rating; i++) { %>&#9733;<% } %>
+          <% for (let i = review.rating; i < 5; i++) { %>&#9734;<% } %>
+        </div>
+        <p class="testimonial-text">"<%= review.content %>"</p>
+        <p class="testimonial-author">— <%= review.first_name %> <%= review.last_name %></p>
+      </div>
+    <% }) %>
+  </div>
+</section>
+<% } %>

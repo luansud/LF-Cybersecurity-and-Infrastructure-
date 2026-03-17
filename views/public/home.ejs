@@ -1,0 +1,60 @@
+<section class="hero">
+  <canvas id="particles-canvas"></canvas>
+  <div class="hero-content">
+    <img src="/images/logo.png" alt="LF Cybersecurity" class="hero-logo">
+    <h1 id="hero-title" data-text="<%= content.hero_title || 'Protect Your Digital World' %>"></h1>
+    <p class="hero-subtitle"><%= content.hero_subtitle || 'Expert cybersecurity education and consulting' %></p>
+  </div>
+</section>
+
+<section class="split-banner">
+  <a href="/course" class="banner-card banner-course">
+    <div class="banner-icon">&#127891;</div>
+    <h2><%= content.course_banner_title || 'Video Course for Individuals' %></h2>
+    <p><%= content.course_banner_text || 'Learn to protect yourself online' %></p>
+    <span class="banner-cta">Explore Course &rarr;</span>
+  </a>
+  <a href="/consulting" class="banner-card banner-consulting">
+    <div class="banner-icon">&#128187;</div>
+    <h2><%= content.consulting_banner_title || 'Consulting for Businesses' %></h2>
+    <p><%= content.consulting_banner_text || 'Professional cybersecurity services' %></p>
+    <span class="banner-cta">Learn More &rarr;</span>
+  </a>
+</section>
+
+<% if (latestNews && latestNews.length > 0) { %>
+<section class="section">
+  <h2 class="section-title">Latest News</h2>
+  <div class="card-grid">
+    <% latestNews.forEach(article => { %>
+      <div class="card">
+        <span class="card-badge"><%= article.category === 'cyber_world' ? 'Cyber World' : article.category === 'articles' ? 'Article' : 'Course News' %></span>
+        <h3><a href="/news/article/<%= article.id %>"><%= article.title %></a></h3>
+        <p><%= article.summary || article.content.substring(0, 150) + '...' %></p>
+        <span class="card-date"><%= new Date(article.created_at).toLocaleDateString() %></span>
+      </div>
+    <% }) %>
+  </div>
+  <div class="section-cta">
+    <a href="/news" class="btn btn-outline">View All News &rarr;</a>
+  </div>
+</section>
+<% } %>
+
+<% if (reviews && reviews.length > 0) { %>
+<section class="section section-alt">
+  <h2 class="section-title">What Our Clients Say</h2>
+  <div class="testimonials">
+    <% reviews.forEach(review => { %>
+      <div class="testimonial-card">
+        <div class="stars">
+          <% for (let i = 0; i < review.rating; i++) { %>&#9733;<% } %>
+          <% for (let i = review.rating; i < 5; i++) { %>&#9734;<% } %>
+        </div>
+        <p class="testimonial-text">"<%= review.content %>"</p>
+        <p class="testimonial-author">— <%= review.first_name %> <%= review.last_name %></p>
+      </div>
+    <% }) %>
+  </div>
+</section>
+<% } %>

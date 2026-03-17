@@ -1,0 +1,33 @@
+<section class="page-header">
+  <h1>News</h1>
+  <p class="page-subtitle">Stay informed about cybersecurity threats, insights, and course updates</p>
+</section>
+
+<% const sections = [
+  { key: 'cyber_world', label: categoryLabels.cyber_world, articles: cyberWorld, icon: '&#127758;' },
+  { key: 'articles', label: categoryLabels.articles, articles: articles, icon: '&#9997;' },
+  { key: 'course_news', label: categoryLabels.course_news, articles: courseNews, icon: '&#127891;' },
+]; %>
+
+<% sections.forEach(sec => { %>
+<section class="section <%= sections.indexOf(sec) % 2 !== 0 ? 'section-alt' : '' %>">
+  <div class="section-header">
+    <h2 class="section-title"><%= sec.icon %> <%= sec.label %></h2>
+    <a href="/news/<%= sec.key %>" class="btn btn-outline btn-sm">View All &rarr;</a>
+  </div>
+
+  <% if (sec.articles.length > 0) { %>
+    <div class="card-grid">
+      <% sec.articles.forEach(article => { %>
+        <div class="card">
+          <h3><a href="/news/article/<%= article.id %>"><%= article.title %></a></h3>
+          <p><%= article.summary || article.content.substring(0, 150) + '...' %></p>
+          <span class="card-date"><%= new Date(article.created_at).toLocaleDateString() %></span>
+        </div>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <p class="empty-message">No articles in this category yet.</p>
+  <% } %>
+</section>
+<% }) %>

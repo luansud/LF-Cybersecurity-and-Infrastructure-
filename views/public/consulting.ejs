@@ -1,0 +1,84 @@
+<section class="page-header">
+  <h1><%= content.page_title || 'Cybersecurity Consulting Services' %></h1>
+  <p class="page-subtitle"><%= content.page_description || '' %></p>
+</section>
+
+<section class="section">
+  <h2 class="section-title">Our Process</h2>
+  <div class="workflow-steps">
+    <div class="step">
+      <div class="step-number">1</div>
+      <h3>Request</h3>
+      <p>Submit a consultation request describing your company's cybersecurity needs and concerns.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">2</div>
+      <h3>Review</h3>
+      <p>Our team reviews your request, evaluates requirements, and prepares a tailored proposal.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <h3>Proposal</h3>
+      <p>You receive a detailed proposal with scope, timeline, and pricing based on your company's size and needs.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">4</div>
+      <h3>Engagement</h3>
+      <p>Active consulting work begins. Track progress and communicate through your dedicated dashboard.</p>
+    </div>
+    <div class="step">
+      <div class="step-number">5</div>
+      <h3>Delivery</h3>
+      <p>Receive comprehensive reports, recommendations, and ongoing support to maintain your security posture.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <h2 class="section-title">Services We Offer</h2>
+  <div class="card-grid">
+    <div class="card">
+      <h3>&#128270; Security Assessment</h3>
+      <p>Comprehensive evaluation of your current security infrastructure, identifying vulnerabilities and risks.</p>
+    </div>
+    <div class="card">
+      <h3>&#128737; Penetration Testing</h3>
+      <p>Simulated cyber attacks to test your defenses and uncover weaknesses before real attackers do.</p>
+    </div>
+    <div class="card">
+      <h3>&#128218; Security Training</h3>
+      <p>Employee awareness training to build a security-first culture across your organization.</p>
+    </div>
+    <div class="card">
+      <h3>&#128295; Infrastructure Hardening</h3>
+      <p>Strengthening your networks, servers, and applications against known attack vectors.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="cta-box">
+    <h2>Ready to Secure Your Business?</h2>
+    <p>Register a company account to submit a consultation request and get started.</p>
+    <a href="/register" class="btn btn-primary btn-large">Create Company Account &rarr;</a>
+    <p class="cta-note">Already have an account? <a href="/login">Login</a> to access your dashboard.</p>
+  </div>
+</section>
+
+<% if (reviews && reviews.length > 0) { %>
+<section class="section section-alt">
+  <h2 class="section-title">Client Testimonials</h2>
+  <div class="testimonials">
+    <% reviews.forEach(review => { %>
+      <div class="testimonial-card">
+        <div class="stars">
+          <% for (let i = 0; i < review.rating; i++) { %>&#9733;<% } %>
+          <% for (let i = review.rating; i < 5; i++) { %>&#9734;<% } %>
+        </div>
+        <p class="testimonial-text">"<%= review.content %>"</p>
+        <p class="testimonial-author">— <%= review.first_name %> <%= review.last_name %></p>
+      </div>
+    <% }) %>
+  </div>
+</section>
+<% } %>

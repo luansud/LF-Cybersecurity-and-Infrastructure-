@@ -1,0 +1,25 @@
+<section class="page-header">
+  <h1><%= categoryLabel %></h1>
+  <a href="/news" class="btn btn-outline btn-sm">&larr; Back to News</a>
+</section>
+
+<section class="section">
+  <% if (articles.length > 0) { %>
+    <div class="card-grid">
+      <% articles.forEach(article => { %>
+        <div class="card">
+          <h3><a href="/news/article/<%= article.id %>"><%= article.title %></a></h3>
+          <p><%= article.summary || article.content.substring(0, 200) + '...' %></p>
+          <div class="card-meta">
+            <span class="card-date"><%= new Date(article.created_at).toLocaleDateString() %></span>
+            <% if (article.first_name) { %>
+              <span class="card-author">By <%= article.first_name %> <%= article.last_name %></span>
+            <% } %>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <p class="empty-message">No articles in this category yet. Check back soon!</p>
+  <% } %>
+</section>
