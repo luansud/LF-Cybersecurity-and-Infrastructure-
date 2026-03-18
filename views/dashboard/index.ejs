@@ -1,0 +1,60 @@
+<section class="page-header">
+  <h1>Welcome, <%= currentUser.first_name %>!</h1>
+  <p class="page-subtitle">Your personal dashboard</p>
+</section>
+
+<section class="section">
+  <div class="dashboard-grid">
+    <a href="<%= hotmartUrl %>" target="_blank" rel="noopener" class="dashboard-card card-accent">
+      <div class="dashboard-icon">&#127891;</div>
+      <h3>Access Course</h3>
+      <p>Go to Hotmart to watch your course videos</p>
+    </a>
+
+    <a href="/reviews/my" class="dashboard-card">
+      <div class="dashboard-icon">&#9733;</div>
+      <h3>My Reviews</h3>
+      <p><%= reviews.length %> review<%= reviews.length !== 1 ? 's' : '' %> submitted</p>
+    </a>
+
+    <a href="/tickets/my" class="dashboard-card">
+      <div class="dashboard-icon">&#127915;</div>
+      <h3>My Tickets</h3>
+      <p><%= tickets.filter(t => t.status !== 'closed').length %> open ticket<%= tickets.filter(t => t.status !== 'closed').length !== 1 ? 's' : '' %></p>
+    </a>
+
+    <a href="/dashboard/profile" class="dashboard-card">
+      <div class="dashboard-icon">&#128100;</div>
+      <h3>My Profile</h3>
+      <p>View and edit your account info</p>
+    </a>
+  </div>
+</section>
+
+<% if (tickets.length > 0) { %>
+<section class="section">
+  <h2 class="section-title">Recent Tickets</h2>
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Subject</th>
+        <th>Category</th>
+        <th>Status</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% tickets.slice(0, 5).forEach(ticket => { %>
+        <tr>
+          <td><a href="/tickets/<%= ticket.id %>">#<%= ticket.id %></a></td>
+          <td><%= ticket.subject %></td>
+          <td><%= ticket.category %></td>
+          <td><span class="status-badge status-<%= ticket.status %>"><%= ticket.status.replace('_', ' ') %></span></td>
+          <td><%= new Date(ticket.created_at).toLocaleDateString() %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>
+<% } %>
