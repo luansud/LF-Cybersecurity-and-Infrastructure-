@@ -1,0 +1,37 @@
+<section class="page-header">
+  <h1><%= review ? 'Edit Review' : 'Write a Review' %></h1>
+  <a href="/reviews/my" class="btn btn-outline btn-sm">&larr; Back to Reviews</a>
+</section>
+
+<section class="section">
+  <form action="<%= review ? '/reviews/' + review.id : '/reviews' %>" method="POST" class="form form-card">
+    <div class="form-group">
+      <label for="review_type">Review Type</label>
+      <select id="review_type" name="review_type" required <%= review ? 'disabled' : '' %>>
+        <option value="course" <%= review && review.review_type === 'course' ? 'selected' : '' %>>Course</option>
+        <option value="consulting" <%= review && review.review_type === 'consulting' ? 'selected' : '' %>>Consulting</option>
+      </select>
+      <% if (review) { %>
+        <input type="hidden" name="review_type" value="<%= review.review_type %>">
+      <% } %>
+    </div>
+
+    <div class="form-group">
+      <label for="rating">Rating</label>
+      <select id="rating" name="rating" required>
+        <option value="5" <%= review && review.rating === 5 ? 'selected' : '' %>>&#9733;&#9733;&#9733;&#9733;&#9733; (5)</option>
+        <option value="4" <%= review && review.rating === 4 ? 'selected' : '' %>>&#9733;&#9733;&#9733;&#9733;&#9734; (4)</option>
+        <option value="3" <%= review && review.rating === 3 ? 'selected' : '' %>>&#9733;&#9733;&#9733;&#9734;&#9734; (3)</option>
+        <option value="2" <%= review && review.rating === 2 ? 'selected' : '' %>>&#9733;&#9733;&#9734;&#9734;&#9734; (2)</option>
+        <option value="1" <%= review && review.rating === 1 ? 'selected' : '' %>>&#9733;&#9734;&#9734;&#9734;&#9734; (1)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="content">Your Review</label>
+      <textarea id="content" name="content" rows="6" required minlength="10" placeholder="Share your experience..."><%= review ? review.content : '' %></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary"><%= review ? 'Update Review' : 'Submit Review' %></button>
+  </form>
+</section>

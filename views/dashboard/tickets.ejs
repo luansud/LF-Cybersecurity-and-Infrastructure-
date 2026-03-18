@@ -1,0 +1,38 @@
+<section class="page-header">
+  <h1>My Tickets</h1>
+  <a href="/tickets/new" class="btn btn-primary">New Ticket</a>
+</section>
+
+<section class="section">
+  <% if (tickets.length > 0) { %>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Subject</th>
+          <th>Category</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% tickets.forEach(ticket => { %>
+          <tr>
+            <td><a href="/tickets/<%= ticket.id %>">#<%= ticket.id %></a></td>
+            <td><a href="/tickets/<%= ticket.id %>"><%= ticket.subject %></a></td>
+            <td><%= ticket.category %></td>
+            <td><span class="priority-<%= ticket.priority %>"><%= ticket.priority %></span></td>
+            <td><span class="status-badge status-<%= ticket.status %>"><%= ticket.status.replace('_', ' ') %></span></td>
+            <td><%= new Date(ticket.created_at).toLocaleDateString() %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <div class="empty-state">
+      <p>You haven't submitted any tickets yet.</p>
+      <a href="/tickets/new" class="btn btn-primary">Submit Your First Ticket</a>
+    </div>
+  <% } %>
+</section>

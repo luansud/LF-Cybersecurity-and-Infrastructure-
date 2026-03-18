@@ -1,0 +1,53 @@
+<section class="page-header">
+  <h1>Ticket #<%= ticket.id %>: <%= ticket.subject %></h1>
+  <a href="/tickets/my" class="btn btn-outline btn-sm">&larr; Back to Tickets</a>
+</section>
+
+<section class="section">
+  <div class="detail-card">
+    <div class="detail-meta">
+      <span class="status-badge status-<%= ticket.status %>"><%= ticket.status.replace('_', ' ') %></span>
+      <span class="card-badge"><%= ticket.category %></span>
+      <span class="priority-<%= ticket.priority %>"><%= ticket.priority %> priority</span>
+      <span class="card-date">Opened: <%= new Date(ticket.created_at).toLocaleDateString() %></span>
+    </div>
+
+    <div class="detail-body">
+      <h3>Original Message</h3>
+      <p><%= ticket.message %></p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">Conversation</h2>
+
+  <div class="conversation">
+    <% if (responses.length > 0) { %>
+      <% responses.forEach(resp => { %>
+        <div class="message-bubble <%= resp.role === 'admin' ? 'message-admin' : 'message-user' %>">
+          <div class="message-header">
+            <strong><%= resp.first_name %> <%= resp.last_name %></strong>
+            <% if (resp.role === 'admin') { %><span class="card-badge">Admin</span><% } %>
+            <span class="card-date"><%= new Date(resp.created_at).toLocaleString() %></span>
+          </div>
+          <p><%= resp.message %></p>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p class="empty-message">No responses yet. We'll get back to you soon!</p>
+    <% } %>
+  </div>
+
+  <% if (ticket.status !== 'closed') { %>
+    <form action="/tickets/<%= ticket.id %>/respond" method="POST" class="form">
+      <div class="form-group">
+        <label for="message">Add a Response</label>
+        <textarea id="message" name="message" rows="3" required placeholder="Type your message..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+  <% } else { %>
+    <p class="empty-message">This ticket is closed.</p>
+  <% } %>
+</section>

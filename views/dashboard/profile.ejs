@@ -1,0 +1,13 @@
+<section class="page-header">
+  <h1>My Profile</h1>
+</section>
+
+<section class="section">
+  <div class="profile-card">
+    <div class="profile-info">
+      <p><strong>Name:</strong> <%= currentUser.first_name %> <%= currentUser.last_name %></p>
+      <p><strong>Email:</strong> <%= currentUser.email %></p>
+      <p><strong>Account Type:</strong> <%= currentUser.role === 'user' ? 'Individual' : currentUser.role === 'company' ? 'Business' : 'Administrator' %></p>
+    </div>
+  </div>
+</section>
