@@ -1,0 +1,70 @@
+<section class="page-header">
+  <h1><%= consultation.title %></h1>
+  <a href="/company/consultations" class="btn btn-outline btn-sm">&larr; Back</a>
+</section>
+
+<section class="section">
+  <div class="detail-card">
+    <div class="detail-meta">
+      <span class="status-badge status-<%= consultation.status %>"><%= consultation.status.replace(/_/g, ' ') %></span>
+      <span class="priority-<%= consultation.priority %>"><%= consultation.priority %> priority</span>
+      <span class="card-date">Created: <%= new Date(consultation.created_at).toLocaleDateString() %></span>
+      <span class="card-date">Updated: <%= new Date(consultation.updated_at).toLocaleDateString() %></span>
+    </div>
+
+    <div class="workflow-timeline">
+      <% const statuses = ['submitted', 'under_review', 'proposal_sent', 'in_progress', 'completed'];
+         const currentIdx = statuses.indexOf(consultation.status);
+         const isCancelled = consultation.status === 'cancelled';
+      %>
+      <% statuses.forEach((s, i) => { %>
+        <div class="timeline-step <%= i <= currentIdx && !isCancelled ? 'step-active' : '' %> <%= i === currentIdx && !isCancelled ? 'step-current' : '' %>">
+          <div class="timeline-dot"></div>
+          <span class="timeline-label"><%= s.replace(/_/g, ' ') %></span>
+        </div>
+      <% }) %>
+      <% if (isCancelled) { %>
+        <div class="timeline-step step-active step-cancelled">
+          <div class="timeline-dot"></div>
+          <span class="timeline-label">Cancelled</span>
+        </div>
+      <% } %>
+    </div>
+
+    <div class="detail-body">
+      <h3>Description</h3>
+      <p><%= consultation.description %></p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title">Notes & Communication</h2>
+
+  <div class="conversation">
+    <% if (notes.length > 0) { %>
+      <% notes.forEach(note => { %>
+        <div class="message-bubble <%= note.role === 'admin' ? 'message-admin' : 'message-user' %>">
+          <div class="message-header">
+            <strong><%= note.first_name %> <%= note.last_name %></strong>
+            <% if (note.role === 'admin') { %><span class="card-badge">Admin</span><% } %>
+            <span class="card-date"><%= new Date(note.created_at).toLocaleString() %></span>
+          </div>
+          <p><%= note.note %></p>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p class="empty-message">No notes yet.</p>
+    <% } %>
+  </div>
+
+  <% if (!['completed', 'cancelled'].includes(consultation.status)) { %>
+    <form action="/company/consultations/<%= consultation.id %>/notes" method="POST" class="form">
+      <div class="form-group">
+        <label for="note">Add a Note</label>
+        <textarea id="note" name="note" rows="3" required placeholder="Type your message..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+  <% } %>
+</section>

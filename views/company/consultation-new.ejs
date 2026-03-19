@@ -1,0 +1,29 @@
+<section class="page-header">
+  <h1>Request Consultation</h1>
+  <a href="/company/consultations" class="btn btn-outline btn-sm">&larr; Back</a>
+</section>
+
+<section class="section">
+  <form action="/company/consultations" method="POST" class="form form-card">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" id="title" name="title" required maxlength="255" placeholder="e.g. Network Security Assessment">
+    </div>
+
+    <div class="form-group">
+      <label for="priority">Priority</label>
+      <select id="priority" name="priority">
+        <option value="low">Low</option>
+        <option value="medium" selected>Medium</option>
+        <option value="high">High</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="8" required minlength="20" placeholder="Describe your cybersecurity needs, concerns, and what you hope to achieve..."></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Request</button>
+  </form>
+</section>
