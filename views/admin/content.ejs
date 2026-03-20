@@ -1,0 +1,67 @@
+<section class="page-header">
+  <h1>Manage Site Content</h1>
+  <a href="/admin" class="btn btn-outline btn-sm">&larr; Dashboard</a>
+</section>
+
+<section class="section">
+  <p class="section-description">Edit the text content displayed on public pages. Changes are reflected immediately.</p>
+
+  <% if (allContent.length > 0) { %>
+    <% 
+      const grouped = {};
+      allContent.forEach(item => {
+        if (!grouped[item.section]) grouped[item.section] = [];
+        grouped[item.section].push(item);
+      });
+    %>
+
+    <% Object.keys(grouped).forEach(section => { %>
+      <div class="content-section-card">
+        <h3 class="content-section-title"><%= section.charAt(0).toUpperCase() + section.slice(1) %> Page</h3>
+        <% grouped[section].forEach(item => { %>
+          <form action="/admin/content" method="POST" class="form content-edit-form">
+            <input type="hidden" name="section" value="<%= item.section %>">
+            <input type="hidden" name="content_key" value="<%= item.content_key %>">
+            <div class="form-group">
+              <label><%= item.content_key.replace(/_/g, ' ') %></label>
+              <% if (item.content_value.length > 100) { %>
+                <textarea name="content_value" rows="3"><%= item.content_value %></textarea>
+              <% } else { %>
+                <input type="text" name="content_value" value="<%= item.content_value %>">
+              <% } %>
+            </div>
+            <button type="submit" class="btn btn-sm btn-primary">Save</button>
+          </form>
+        <% }) %>
+      </div>
+    <% }) %>
+  <% } else { %>
+    <p class="empty-message">No site content entries found.</p>
+  <% } %>
+</section>
+
+<section class="section">
+  <h2 class="section-title">Add New Content</h2>
+  <form action="/admin/content" method="POST" class="form form-card">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="section">Section</label>
+        <select name="section" id="section" required>
+          <option value="home">Home</option>
+          <option value="course">Course</option>
+          <option value="consulting">Consulting</option>
+          <option value="about">About</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="content_key">Key</label>
+        <input type="text" name="content_key" id="content_key" required placeholder="e.g. hero_title">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="content_value">Value</label>
+      <textarea name="content_value" id="content_value" rows="3" required placeholder="Content text..."></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Add Content</button>
+  </form>
+</section>

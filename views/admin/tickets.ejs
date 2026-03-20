@@ -1,0 +1,39 @@
+<section class="page-header">
+  <h1>Manage Tickets</h1>
+  <a href="/admin" class="btn btn-outline btn-sm">&larr; Dashboard</a>
+</section>
+
+<section class="section">
+  <% if (tickets.length > 0) { %>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>User</th>
+          <th>Subject</th>
+          <th>Category</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% tickets.forEach(ticket => { %>
+          <tr>
+            <td>#<%= ticket.id %></td>
+            <td><%= ticket.first_name %> <%= ticket.last_name %></td>
+            <td><%= ticket.subject %></td>
+            <td><%= ticket.category %></td>
+            <td><span class="priority-<%= ticket.priority %>"><%= ticket.priority %></span></td>
+            <td><span class="status-badge status-<%= ticket.status %>"><%= ticket.status.replace('_', ' ') %></span></td>
+            <td><%= new Date(ticket.created_at).toLocaleDateString() %></td>
+            <td><a href="/admin/tickets/<%= ticket.id %>" class="btn btn-sm btn-outline">View</a></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p class="empty-message">No tickets yet.</p>
+  <% } %>
+</section>

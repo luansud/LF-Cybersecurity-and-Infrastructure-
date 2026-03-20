@@ -1,0 +1,39 @@
+<section class="page-header">
+  <h1>Admin Dashboard</h1>
+  <p class="page-subtitle">System overview</p>
+</section>
+
+<section class="section">
+  <div class="dashboard-grid">
+    <a href="/admin/users" class="dashboard-card">
+      <div class="dashboard-icon">&#128101;</div>
+      <h3>Users</h3>
+      <p><%= totalUsers %> registered</p>
+    </a>
+    <a href="/admin/tickets" class="dashboard-card">
+      <div class="dashboard-icon">&#127915;</div>
+      <h3>Open Tickets</h3>
+      <p><%= openTickets %></p>
+    </a>
+    <a href="/admin/consultations" class="dashboard-card">
+      <div class="dashboard-icon">&#128203;</div>
+      <h3>Active Consultations</h3>
+      <p><%= activeConsultations %></p>
+    </a>
+    <a href="/admin/reviews" class="dashboard-card">
+      <div class="dashboard-icon">&#9733;</div>
+      <h3>Pending Reviews</h3>
+      <p><%= pendingReviews %></p>
+    </a>
+    <a href="/admin/news" class="dashboard-card">
+      <div class="dashboard-icon">&#128240;</div>
+      <h3>Manage News</h3>
+      <p>Articles & updates</p>
+    </a>
+    <a href="/admin/content" class="dashboard-card">
+      <div class="dashboard-icon">&#9998;</div>
+      <h3>Site Content</h3>
+      <p>Edit page text</p>
+    </a>
+  </div>
+</section>

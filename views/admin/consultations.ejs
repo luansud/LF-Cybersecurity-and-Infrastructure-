@@ -1,0 +1,37 @@
+<section class="page-header">
+  <h1>Manage Consultations</h1>
+  <a href="/admin" class="btn btn-outline btn-sm">&larr; Dashboard</a>
+</section>
+
+<section class="section">
+  <% if (consultations.length > 0) { %>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Company</th>
+          <th>Title</th>
+          <th>Priority</th>
+          <th>Status</th>
+          <th>Created</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% consultations.forEach(c => { %>
+          <tr>
+            <td><%= c.id %></td>
+            <td><%= c.company_name %></td>
+            <td><%= c.title %></td>
+            <td><span class="priority-<%= c.priority %>"><%= c.priority %></span></td>
+            <td><span class="status-badge status-<%= c.status %>"><%= c.status.replace(/_/g, ' ') %></span></td>
+            <td><%= new Date(c.created_at).toLocaleDateString() %></td>
+            <td><a href="/admin/consultations/<%= c.id %>" class="btn btn-sm btn-outline">View</a></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <p class="empty-message">No consultations yet.</p>
+  <% } %>
+</section>

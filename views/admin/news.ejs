@@ -1,0 +1,55 @@
+<section class="page-header">
+  <h1>Manage News</h1>
+  <div class="page-actions">
+    <a href="/admin" class="btn btn-outline btn-sm">&larr; Dashboard</a>
+    <a href="/admin/news/new" class="btn btn-primary">New Article</a>
+  </div>
+</section>
+
+<section class="section">
+  <% if (articles.length > 0) { %>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Category</th>
+          <th>Published</th>
+          <th>Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% articles.forEach(article => { %>
+          <tr>
+            <td><%= article.id %></td>
+            <td><%= article.title %></td>
+            <td><%= article.category.replace('_', ' ') %></td>
+            <td>
+              <span class="status-badge <%= article.is_published ? 'status-completed' : 'status-submitted' %>">
+                <%= article.is_published ? 'Published' : 'Draft' %>
+              </span>
+            </td>
+            <td><%= new Date(article.created_at).toLocaleDateString() %></td>
+            <td class="action-cell">
+              <a href="/admin/news/<%= article.id %>/edit" class="btn btn-sm btn-outline">Edit</a>
+              <form action="/admin/news/<%= article.id %>/toggle" method="POST" class="inline-form">
+                <button type="submit" class="btn btn-sm <%= article.is_published ? 'btn-warning' : 'btn-primary' %>">
+                  <%= article.is_published ? 'Unpublish' : 'Publish' %>
+                </button>
+              </form>
+              <form action="/admin/news/<%= article.id %>/delete" method="POST" class="inline-form" onsubmit="return confirm('Delete this article?')">
+                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  <% } else { %>
+    <div class="empty-state">
+      <p>No articles yet.</p>
+      <a href="/admin/news/new" class="btn btn-primary">Create Your First Article</a>
+    </div>
+  <% } %>
+</section>
