@@ -1,0 +1,121 @@
+<section class="page-header">
+  <h1>Account Settings</h1>
+  <p class="page-subtitle">Manage your profile, security, and preferences</p>
+</section>
+
+<section class="section">
+  <div class="account-grid">
+
+    <!-- Profile Information -->
+    <div class="account-card">
+      <h2 class="account-card-title">&#128100; Profile Information</h2>
+      <form action="/account/profile" method="POST" class="form">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="first_name" required value="<%= user.first_name %>">
+          </div>
+          <div class="form-group">
+            <label for="last_name">Last Name</label>
+            <input type="text" id="last_name" name="last_name" required value="<%= user.last_name %>">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required value="<%= user.email %>">
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone</label>
+           <input type="tel" id="phone" name="phone" value="<%= user.phone || '' %>" placeholder="(555) 123-4567">
+        </div>
+
+
+        <div class="form-group">
+          <label>Account Type</label>
+          <input type="text" disabled value="<%= user.role === 'admin' ? 'Administrator' : user.role === 'company' ? 'Business' : 'Individual' %>">
+        </div>
+
+        <div class="form-group">
+          <label>Member Since</label>
+          <input type="text" disabled value="<%= new Date(user.created_at).toLocaleDateString() %>">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+      </form>
+    </div>
+
+    <!-- Change Password -->
+    <div class="account-card">
+      <h2 class="account-card-title">&#128272; Change Password</h2>
+      <form action="/account/password" method="POST" class="form">
+        <div class="form-group">
+          <label for="current_password">Current Password</label>
+          <input type="password" id="current_password" name="current_password" required placeholder="Enter current password">
+        </div>
+
+        <div class="form-group">
+          <label for="new_password">New Password</label>
+          <input type="password" id="new_password" name="new_password" required minlength="8" placeholder="Min. 8 characters">
+        </div>
+
+        <div class="form-group">
+          <label for="confirm_password">Confirm New Password</label>
+          <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirm new password">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update Password</button>
+      </form>
+    </div>
+
+    <!-- Notification Preferences -->
+    <div class="account-card">
+      <h2 class="account-card-title">&#128276; Notification Preferences</h2>
+      <form action="/account/notifications" method="POST" class="form">
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" name="email_notifications" checked>
+            <span>Email notifications for important updates</span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" name="ticket_updates" checked>
+            <span>Notifications when my tickets are updated</span>
+          </label>
+        </div>
+
+        <% if (currentUser.role === 'company') { %>
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" name="consultation_updates" checked>
+            <span>Notifications when consultation status changes</span>
+          </label>
+        </div>
+        <% } %>
+
+        <button type="submit" class="btn btn-primary">Save Preferences</button>
+      </form>
+    </div>
+
+    <!-- Danger Zone -->
+    <% if (currentUser.role !== 'admin') { %>
+    <div class="account-card account-card-danger">
+      <h2 class="account-card-title">&#9888; Danger Zone</h2>
+      <p class="danger-warning">Deleting your account is permanent. All your data, reviews, tickets, and consultation history will be permanently removed. This action cannot be undone.</p>
+
+      <form action="/account/delete" method="POST" class="form" onsubmit="return confirm('Are you absolutely sure? This cannot be undone.')">
+        <div class="form-group">
+          <label for="confirm_email">Type your email to confirm: <strong><%= user.email %></strong></label>
+          <input type="email" id="confirm_email" name="confirm_email" required placeholder="Type your email to confirm deletion">
+        </div>
+
+        <button type="submit" class="btn btn-danger">Permanently Delete My Account</button>
+      </form>
+    </div>
+    <% } %>
+
+  </div>
+</section>

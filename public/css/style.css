@@ -264,6 +264,17 @@ img { max-width: 100%; height: auto; }
 .profile-info p { margin-bottom: 0.5rem; color: var(--text-secondary); }
 .profile-info strong { color: var(--text-primary); }
 
+/* ---------- Account Page ---------- */
+.account-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; max-width: 900px; }
+.account-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; }
+.account-card .form { max-width: 100%; }
+.account-card-title { color: var(--text-primary); font-size: 1.2rem; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--border); }
+.account-card-danger { border-color: rgba(255,71,87,0.3); }
+.account-card-danger .account-card-title { color: var(--danger); }
+.danger-warning { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.25rem; padding: 0.75rem; background: rgba(255,71,87,0.06); border-radius: var(--radius); border: 1px solid rgba(255,71,87,0.15); }
+.checkbox-label { display: flex; align-items: center; gap: 0.65rem; cursor: pointer; font-weight: normal !important; color: var(--text-secondary); }
+.checkbox-label input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--primary); cursor: pointer; }
+
 /* ---------- Admin Content ---------- */
 .content-section-card { background: var(--bg-card); border: 1px solid var(--border); padding: 1.5rem; border-radius: var(--radius-lg); margin-bottom: 1.5rem; }
 .content-section-title { color: var(--primary); margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); text-transform: capitalize; }
@@ -308,6 +319,7 @@ img { max-width: 100%; height: auto; }
   .footer-content { grid-template-columns: 1fr; }
   .card-horizontal { flex-direction: column; }
   .dashboard-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+  .account-grid { grid-template-columns: 1fr; }
   .workflow-timeline { flex-direction: column; gap: 0.75rem; padding: 0; }
   .workflow-timeline::before { display: none; }
   .timeline-step { flex-direction: row; gap: 0.75rem; }

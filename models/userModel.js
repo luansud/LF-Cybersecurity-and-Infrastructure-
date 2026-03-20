@@ -12,7 +12,7 @@ const userModel = {
 // Get user by ID without password hash for security reasons
    async getById(id) {
     const result = await pool.query(
-      'SELECT id, email, first_name, last_name, role, is_active, created_at FROM users WHERE id = $1',
+      'SELECT id, email, first_name, last_name, role, phone, is_active, created_at FROM users WHERE id = $1',
       [id]
     );
     return result.rows[0] || null;
@@ -56,11 +56,35 @@ const userModel = {
   },
 
  // User profile update
-  async updateProfile(id, { first_name, last_name, email }) {
+  async updateProfile(id, { first_name, last_name, email, phone, address }) {
     const result = await pool.query(
-      `UPDATE users SET first_name = $1, last_name = $2, email = $3, updated_at = NOW()
-       WHERE id = $4 RETURNING id, email, first_name, last_name, role`,
-      [first_name, last_name, email, id]
+      `UPDATE users SET first_name = $1, last_name = $2, email = $3, phone = $4, updated_at = NOW()
+       WHERE id = $5 RETURNING id, email, first_name, last_name, role, phone`,
+      [first_name, last_name, email, phone || null, id]
+    );
+    return result.rows[0] || null;
+  },
+
+  // User password update
+  async updatePassword(id, password_hash) {
+    const result = await pool.query(
+      'UPDATE users SET password_hash = $1, updated_at = NOW() WHERE id = $2 RETURNING id',
+      [password_hash, id]
+    );
+    return result.rows[0] || null;
+  },
+
+  // User notification preferences (stub for now)
+  async updateNotificationPrefs(id, prefs) {
+    return prefs;
+  },
+
+  // Delete user account permanently
+  
+  async deleteAccount(id) {
+    const result = await pool.query(
+      'DELETE FROM users WHERE id = $1 RETURNING id',
+      [id]
     );
     return result.rows[0] || null;
   },

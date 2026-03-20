@@ -19,6 +19,7 @@ import companyRoutes from './routes/companyRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
 import reviewRoutes from './routes/reviewRoutes.js';
 import ticketRoutes from './routes/ticketRoutes.js';
+import accountRoutes from './routes/accountRoutes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -77,6 +78,8 @@ app.use('/company', companyRoutes);
 app.use('/admin', adminRoutes);
 app.use('/reviews', reviewRoutes);
 app.use('/tickets', ticketRoutes);
+app.use('/account', accountRoutes);
+
 
 // Error Handling
 app.use(notFoundHandler);

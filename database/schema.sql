@@ -17,6 +17,7 @@ CREATE TABLE users (
   first_name VARCHAR(100) NOT NULL,
   last_name VARCHAR(100) NOT NULL,
   role VARCHAR(20) NOT NULL DEFAULT 'user' CHECK (role IN ('admin', 'company', 'user')),
+  phone VARCHAR(20) NOT NULL,
   is_active BOOLEAN NOT NULL DEFAULT true,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMP NOT NULL DEFAULT NOW()
@@ -129,16 +130,16 @@ CREATE INDEX idx_news_published ON news_articles(is_published);
 
 -- Admin user (password: P@$$w0rd!)
 -- bcrypt hash for P@$$w0rd!
-INSERT INTO users (email, password_hash, first_name, last_name, role) VALUES
-('admin@lfcyber.com', '$2a$10$XKvlSmQPyyJBKcjxf11bNuM4uQfL7LwvayHTLc1yHMSbTNKLkmwMe', 'Luã', 'Ferreira', 'admin');
+INSERT INTO users (email, password_hash, first_name, last_name, phone, role) VALUES
+('admin@lfcyber.com', '$2a$10$VvRb0PQINA/65Y9p5kIloeuFUUyrr2SxHCnnmBoB8QEPuYdnAaVi2', 'Luã', 'Ferreira','555-555-5555', 'admin');
 
 -- Company client user
-INSERT INTO users (email, password_hash, first_name, last_name, role) VALUES
-('company@testcorp.com', '$2a$10$XKvlSmQPyyJBKcjxf11bNuM4uQfL7LwvayHTLc1yHMSbTNKLkmwMe', 'Maria', 'Santos', 'company');
+INSERT INTO users (email, password_hash, first_name, last_name, phone, role) VALUES
+('company@testcorp.com', '$2a$10$VvRb0PQINA/65Y9p5kIloeuFUUyrr2SxHCnnmBoB8QEPuYdnAaVi2', 'Maria', 'Santos', '555-555-5555', 'company');
 
 -- Standard user
-INSERT INTO users (email, password_hash, first_name, last_name, role) VALUES
-('user@example.com', '$2a$10$XKvlSmQPyyJBKcjxf11bNuM4uQfL7LwvayHTLc1yHMSbTNKLkmwMe', 'João', 'Silva', 'user');
+INSERT INTO users (email, password_hash, first_name, last_name, phone, role) VALUES
+('user@example.com', '$2a$10$VvRb0PQINA/65Y9p5kIloeuFUUyrr2SxHCnnmBoB8QEPuYdnAaVi2', 'João', 'Silva', '555-555-5555', 'user');
 
 -- Company profile for company client
 INSERT INTO companies (user_id, company_name, industry, company_size, phone) VALUES
