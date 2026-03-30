@@ -68,7 +68,7 @@ const authController = {
   // POST /register
   async register(req, res, next) {
     try {
-      const { email, password, first_name, last_name, account_type } = req.body;
+      const { email, password, first_name, last_name, phone, account_type } = req.body;
 
       // Check if email already exists
       const existingUser = await userModel.getByEmail(email);
@@ -84,7 +84,7 @@ const authController = {
       // Create user
       const role = account_type === 'company' ? 'company' : 'user';
       const newUser = await userModel.create({
-        email, password_hash, first_name, last_name, role,
+        email, password_hash, first_name, last_name, phone, role,
       });
 
       // If company, create company profile

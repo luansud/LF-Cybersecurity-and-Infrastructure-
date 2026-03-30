@@ -19,12 +19,12 @@ const userModel = {
   },
 
 //  User registration
-  async create({ email, password_hash, first_name, last_name, role = 'user' }) {
+  async create({ email, password_hash, first_name, last_name, phone, role = 'user' }) {
     const result = await pool.query(
-      `INSERT INTO users (email, password_hash, first_name, last_name, role)
-       VALUES ($1, $2, $3, $4, $5)
+      `INSERT INTO users (email, password_hash, first_name, last_name, phone, role)
+       VALUES ($1, $2, $3, $4, $5, $6)
        RETURNING id, email, first_name, last_name, role, created_at`,
-      [email, password_hash, first_name, last_name, role]
+      [email, password_hash, first_name, last_name, phone, role]
     );
     return result.rows[0];
   },
