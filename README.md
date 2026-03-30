@@ -6,15 +6,13 @@ LF Cybersecurity and Infrastructure is a professional cybersecurity services pla
 
 The platform serves as a central hub where visitors can learn about the dangers of cyber threats through real-world news stories, explore a video course designed to teach everyday internet security practices, or inquire about consulting services to protect their business infrastructure. The site emphasizes awareness — showing users why cybersecurity matters through real incidents of hacking, data breaches, and identity theft — while offering practical solutions through education and professional services.
 
-Built with Node.js, Express, EJS, and PostgreSQL. Deployed on Render.
+Built using MVC architecture, Node.js, Express, EJS, and PostgreSQL. Deployed on Render.
 
 ## Database Schema
 
-![ERD Diagram](./database/erd.png)
+![ERD](C:\Users\Luan\Desktop\Projects\My%20Website\LF-Cybersecurity-and-Infrastructure-\ERD.png)
 
 Tables: users, companies, consultations, consultation_notes, reviews, tickets, ticket_responses, news_articles, site_content.
-
-Foreign keys connect companies to users, consultations to companies, reviews and tickets to users, and notes/responses to their parent records. CASCADE deletes are used where it makes sense (e.g. deleting a user removes their reviews and tickets), and SET NULL is used for things like author references on news articles so the content stays even if the user is removed.
 
 ## User Roles
 
@@ -30,11 +28,11 @@ There are three roles in the system:
 
 All test accounts use the password: `P@$$w0rd!`
 
-| Role    | Email                  |
-|---------|------------------------|
-| Admin   | admin@lfcyber.com      |
-| Company | company@testcorp.com   |
-| User    | user@example.com       |
+| Role    | Email                |
+| ------- | -------------------- |
+| Admin   | admin@lfcyber.com    |
+| Company | company@testcorp.com |
+| User    | user@example.com     |
 
 ## Known Limitations
 
