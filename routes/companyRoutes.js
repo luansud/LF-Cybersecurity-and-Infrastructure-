@@ -13,7 +13,5 @@ router.get('/consultations/new', companyController.showNewConsultation);
 router.post('/consultations', validateConsultation, companyController.createConsultation);
 router.get('/consultations/:id', companyController.consultationDetail);
 router.post('/consultations/:id/notes', companyController.addNote);
-router.get('/profile', companyController.showProfile);
-router.post('/profile', companyController.updateProfile);
 
 export default router;

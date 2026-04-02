@@ -1,7 +1,6 @@
 import { body, validationResult } from 'express-validator';
 
-// Handle validation results — returns errors to the caller
-
+// Handle validation results
 export function handleValidationErrors(req, res, next) {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -53,7 +52,7 @@ export const validateLogin = [
   handleValidationErrors,
 ];
 
-// Company profile validation rules
+// Review validation rules
 export const validateReview = [
   body('content')
     .trim()
@@ -67,7 +66,7 @@ export const validateReview = [
   handleValidationErrors,
 ];
 
-//  Company profile validation rules
+// Ticket validation rules
 export const validateTicket = [
   body('subject')
     .trim()

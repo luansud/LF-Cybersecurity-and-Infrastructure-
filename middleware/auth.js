@@ -1,5 +1,5 @@
+// Authentication & Authorization Middleware
 
-  // * Authentication & Authorization Middleware
 // Check if user is logged in
 export function isAuthenticated(req, res, next) {
   if (req.session.user) {
@@ -32,7 +32,6 @@ export function isGuest(req, res, next) {
   if (!req.session.user) {
     return next();
   }
-  // Redirect logged-in users to their appropriate dashboard
   const role = req.session.user.role;
   if (role === 'admin') return res.redirect('/admin');
   if (role === 'company') return res.redirect('/company/dashboard');

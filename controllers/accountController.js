@@ -37,11 +37,11 @@ const accountController = {
         first_name, last_name, email, phone
       });
  
-      // Update session data
       req.session.user.first_name = updated.first_name;
       req.session.user.last_name = updated.last_name;
       req.session.user.email = updated.email;
       req.session.user.phone = updated.phone;
+
  
       req.flash('success', 'Profile updated successfully.');
       res.redirect('/account');

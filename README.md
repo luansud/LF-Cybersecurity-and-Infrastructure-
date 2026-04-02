@@ -10,7 +10,7 @@ Built using MVC architecture, Node.js, Express, EJS, and PostgreSQL. Deployed on
 
 ## Database Schema
 
-![ERD](C:\Users\Luan\Desktop\Projects\My%20Website\LF-Cybersecurity-and-Infrastructure-\ERD.png)
+./ERD.png  
 
 Tables: users, companies, consultations, consultation_notes, reviews, tickets, ticket_responses, news_articles, site_content.
 
@@ -41,3 +41,8 @@ All test accounts use the password: `P@$$w0rd!`
 - Lists (tickets, reviews, consultations, users in admin) don't have pagination yet. Works fine with the current amount of data but would need pagination if the site scaled up.
 - No file upload support for consultations or tickets — users can only submit text.
 - The course itself links to an external platform (Hotmart). The site doesn't host course content directly.
+
+
+
+
+

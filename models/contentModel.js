@@ -1,14 +1,6 @@
 import pool from '../config/db.js';
 
 const contentModel = {
-  async get(section, content_key) {
-    const result = await pool.query(
-      'SELECT content_value FROM site_content WHERE section = $1 AND content_key = $2',
-      [section, content_key]
-    );
-    return result.rows[0]?.content_value || '';
-  },
-
   async getSection(section) {
     const result = await pool.query(
       'SELECT content_key, content_value FROM site_content WHERE section = $1',

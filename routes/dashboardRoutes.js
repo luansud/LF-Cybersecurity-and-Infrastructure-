@@ -7,6 +7,5 @@ const router = Router();
 router.use(isAuthenticated);
 
 router.get('/', dashboardController.index);
-router.get('/profile', dashboardController.showProfile);
 
 export default router;

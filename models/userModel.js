@@ -56,7 +56,7 @@ const userModel = {
   },
 
  // User profile update
-  async updateProfile(id, { first_name, last_name, email, phone, address }) {
+  async updateProfile(id, { first_name, last_name, email, phone }) {
     const result = await pool.query(
       `UPDATE users SET first_name = $1, last_name = $2, email = $3, phone = $4, updated_at = NOW()
        WHERE id = $5 RETURNING id, email, first_name, last_name, role, phone`,

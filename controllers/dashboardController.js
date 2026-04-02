@@ -22,12 +22,6 @@ const dashboardController = {
     }
   },
 
-  // GET /dashboard/profile
-  showProfile(req, res) {
-    res.render('dashboard/profile', {
-      title: 'My Profile',
-    });
-  },
 };
 
 export default dashboardController;

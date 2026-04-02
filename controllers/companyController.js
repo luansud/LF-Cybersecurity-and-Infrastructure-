@@ -123,35 +123,6 @@ const companyController = {
     }
   },
 
-  // GET /company/profile
-  async showProfile(req, res, next) {
-    try {
-      const company = await companyModel.getByUserId(req.session.user.id);
-      res.render('company/profile', {
-        title: 'Company Profile',
-        company,
-      });
-    } catch (err) {
-      next(err);
-    }
-  },
-
-  // POST /company/profile
-  async updateProfile(req, res, next) {
-    try {
-      const company = await companyModel.getByUserId(req.session.user.id);
-      const { company_name, industry, company_size, phone, website } = req.body;
-
-      await companyModel.update(company.id, {
-        company_name, industry, company_size, phone, website,
-      });
-
-      req.flash('success', 'Company profile updated.');
-      res.redirect('/company/profile');
-    } catch (err) {
-      next(err);
-    }
-  },
 };
 
 export default companyController;
